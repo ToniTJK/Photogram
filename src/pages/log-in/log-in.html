@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Log In
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page2" style="background-color:#DF3363;">
+  <form id="logIn-form1">
+    <ion-list id="logIn-list1">
+      <ion-item id="logIn-input1">
+        <ion-label>
+          Email:
+        </ion-label>
+        <ion-input type="email" placeholder="" name="email"></ion-input>
+      </ion-item>
+      <ion-item id="logIn-input2">
+        <ion-label>
+          Password:
+        </ion-label>
+        <ion-input type="password" placeholder="" name="firstPassword"></ion-input>
+      </ion-item>
+      <ion-item id="logIn-input6">
+        <ion-label>
+          Repeat Password:
+        </ion-label>
+        <ion-input type="password" placeholder="" name="secondPassword"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="height:40px;" id="logIn-spacer1"></div>
+    <button id="logIn-button1" ion-button color="dark" block icon-right on-click="goToHome()">
+      Log in
+      <ion-icon name="arrow-dropright-circle"></ion-icon>
+    </button>
+    <button id="logIn-button2" ion-button clear color="balanced" block icon-right on-click="goToHome()">
+      Entrar como invitado
+      <ion-icon name="cafe"></ion-icon>
+    </button>
+    <button id="logIn-button5" ion-button clear color="positive" block on-click="goToRegistrar()">
+      ¿Aun no tienes una cuenta?
+    </button>
+  </form>
+</ion-content>
