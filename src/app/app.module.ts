@@ -8,6 +8,10 @@ import { RegistrarPage } from '../pages/registrar/registrar';
 import { EditarPostPage } from '../pages/editar-post/editar-post';
 import { CrearPostPage } from '../pages/crear-post/crear-post';
 
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environment/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,10 +23,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LogInPage,
     RegistrarPage,
     EditarPostPage,
-    CrearPostPage
+    CrearPostPage,
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
