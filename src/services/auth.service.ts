@@ -1,15 +1,17 @@
-/*import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/toPromise';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class AuthService {
-
+	
 	private _userId: string;
 
-	constructor(private angularFireAuth: AngularFireAuth,
-				public db: AngularFirestore) {
+	constructor(
+		private angularFireAuth: AngularFireAuth,
+		//public db: AngularFirestore PETA????
+		) {
 		this.angularFireAuth.authState.subscribe((user) => {
 			if (user) {
 				this._userId = user.uid;
@@ -17,10 +19,6 @@ export class AuthService {
 				this._userId = null;
 			}
 		})
-	}
-
-	get userId():string {
-		return this._userId;
 	}
 
 	doSingUp(values) {
@@ -35,6 +33,12 @@ export class AuthService {
 		})
 	}
 
+	
+
+	get userId():string {
+		return this._userId;
+	}
+
 	doLogin(values) {
 		return new Promise<any>((resolve, reject) => {
 			this.angularFireAuth.auth.signInWithEmailAndPassword(values.email, values.password)
@@ -46,7 +50,7 @@ export class AuthService {
 			});
 		})
 	}
-
+/*
 	doLogout() {
 		return new Promise((resolve, reject) => {
 			if(this.angularFireAuth.auth.currentUser){
@@ -58,7 +62,6 @@ export class AuthService {
 				});
 			}
 		})
-	}
+	}*/
 	
 }
-*/

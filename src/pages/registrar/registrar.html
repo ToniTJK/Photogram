@@ -6,30 +6,45 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page3" style="background-color:#DF3363;">
-  <form id="registrar-form2">
+  <form #registroForm id="registrar-form2">
     <ion-list id="registrar-list2">
       <ion-item id="registrar-input3">
         <ion-label>
           Nombre
         </ion-label>
-        <ion-input type="text" placeholder="Juan" name="nombre"></ion-input>
+        <ion-input type="text" placeholder="Juan" name="nombre" #nombre="ngModel" [(ngModel)]="user.nombre" required></ion-input>
       </ion-item>
       <ion-item id="registrar-input4">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder="juan@juan.com" name="email"></ion-input>
+        <ion-input type="email" placeholder="juan@juan.com" name="email" #email="ngModel" [(ngModel)]="user.email" required></ion-input>
       </ion-item>
       <ion-item id="registrar-input5">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="text" placeholder="**********" name="password"></ion-input>
+        <ion-input type="password" placeholder="**********" name="password1" #password1="ngModel" [(ngModel)]="user.password" required></ion-input>
+      </ion-item>
+
+      <ion-item id="registrar-input6">
+        <ion-label>
+          Repeat Password
+        </ion-label>
+        <ion-input type="password" placeholder="**********" name="password2" [(ngModel)]="password2" required></ion-input>
       </ion-item>
     </ion-list>
-    <button id="registrar-button3" ion-button color="dark" block on-click="goToLogIn()">
+    <!--<div class="spacer" style="height:40px;"></div>-->
+		<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>{{errorMsg}}</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+    <button id="registrar-button3" ion-button color="dark" block on-click="onSubmit()">
       Registrar
     </button>
+		<div class="spacer" style="height:40px;"></div>
   </form>
   <button id="registrar-button10" ion-button clear color="balanced" block on-click="goToLogIn()">
     ¿Ya tienes una cuenta?
