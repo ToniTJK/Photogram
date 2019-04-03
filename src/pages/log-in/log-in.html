@@ -6,29 +6,36 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2" style="background-color:#DF3363;">
-  <form id="logIn-form1">
+  <form #loginForm id="logIn-form1">
     <ion-list id="logIn-list1">
       <ion-item id="logIn-input1">
         <ion-label>
           Email:
         </ion-label>
-        <ion-input type="email" placeholder="" name="email"></ion-input>
+        <ion-input type="email" placeholder="" name="email" #email="ngModel" [(ngModel)]="user.email" required></ion-input>
       </ion-item>
       <ion-item id="logIn-input2">
         <ion-label>
           Password:
         </ion-label>
-        <ion-input type="password" placeholder="" name="firstPassword"></ion-input>
+        <ion-input type="password" placeholder="" name="password" #password="ngModel" [(ngModel)]="user.password" required></ion-input>
       </ion-item>
       <ion-item id="logIn-input6">
         <ion-label>
           Repeat Password:
         </ion-label>
-        <ion-input type="password" placeholder="" name="secondPassword"></ion-input>
-      </ion-item>
+        <ion-input type="password" placeholder="**********" name="password2" [(ngModel)]="password2" required></ion-input>
+      </ion-item> 
     </ion-list>
     <div class="spacer" style="height:40px;" id="logIn-spacer1"></div>
-    <button id="logIn-button1" ion-button color="dark" block icon-right on-click="goToHome()">
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>{{errorMsg}}</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+    </div>
+    
+    <button id="logIn-button1" ion-button color="dark" block icon-right on-click="onSubmit()">
       Log in
       <ion-icon name="arrow-dropright-circle"></ion-icon>
     </button>

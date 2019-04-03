@@ -18,6 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 //SERVICES
 import { AuthService } from '../services/auth.service';
+import { PublicationService } from '../services/publicationService';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -51,6 +52,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     AuthService,
     AngularFireAuth,
+    PublicationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

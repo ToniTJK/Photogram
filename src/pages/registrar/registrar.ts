@@ -13,7 +13,7 @@ export class RegistrarPage {
 
   private user: User;
   private password2:string;
-  private error: boolean = false;
+  private error: boolean;
 	private errorMsg: string;
 
   constructor(
@@ -21,6 +21,8 @@ export class RegistrarPage {
     public _AuthService: AuthService
     ) {
       this.user = new User("","","");
+      this.error = false;
+      this.errorMsg = "";
   }
   onSubmit(){
     console.log(this.user);
