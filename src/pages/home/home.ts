@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { PublicationService } from '../../services/publicationService';
+import { CrearPostPage } from '../crear-post/crear-post'
 
 @Component({
   selector: 'page-home',
@@ -37,6 +38,10 @@ export class HomePage {
 		.then(publications => {
 			this.publications = publications;
 		})
-	}
+  }
+  
+  goToCreatorPost(){
+    this.navCtrl.push(CrearPostPage);
+  }
   
 }
