@@ -23,7 +23,7 @@ export class HomePage {
   }*/
 
   ionViewWillEnter(){
-		this.loadItems();
+		this.loadData();
 	}
 
   loadData(){
@@ -33,12 +33,12 @@ export class HomePage {
 		});
   }
 
-  loadItems() {
+  /*loadItems() {
 		this._publicationService.getPublications()
 		.then(publications => {
 			this.publications = publications;
 		})
-  }
+  }*/
   
   goToCreatorPost(){
     this.navCtrl.push(CrearPostPage);

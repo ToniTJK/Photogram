@@ -1,5 +1,7 @@
 {
   "name": "xarxaSocialPhotos",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

@@ -6,25 +6,28 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page6" style="background-color:#DF3363;">
-  <form id="crearPost-form5">
+  <form #createForm id="crearPost-form5">
     <img src="assets/img/5NQPhYZxRvSEW1Kbz7gg_default-image.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
     <ion-item id="crearPost-input11">
       <ion-label>
-        Título
+        Título:
       </ion-label>
-      <ion-input type="text" placeholder="Título" name="title"></ion-input>
+      <ion-input type="text" placeholder="Título" name="title" #title="ngModel" [(ngModel)]="publi.title"></ion-input>
     </ion-item>
     <ion-item id="crearPost-textarea3">
       <ion-label>
-        Descripción
+        Descripción:
       </ion-label>
-      <ion-textarea placeholder="Text here..."></ion-textarea>
+      <ion-textarea placeholder="Text here..." name="description" #description="ngModel" [(ngModel)]="publi.description"></ion-textarea>
     </ion-item>
   </form>
-  <button id="crearPost-button11" ion-button color="energized" class="btnVolver" on-click="goToHome()">
-    Volver
+  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="openCamera()">
+    Take a picture
   </button>
-  <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="goToHome()">
+  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="openGallery()">
+      Gallery
+    </button>
+  <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="createPublication()">
     Crear
   </button>
 </ion-content>

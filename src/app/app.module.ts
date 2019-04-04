@@ -1,3 +1,4 @@
+// IONIC
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -19,6 +20,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 //SERVICES
 import { AuthService } from '../services/auth.service';
 import { PublicationService } from '../services/publicationService';
+
+// CAMERA
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -50,6 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    //ImagePicker,
+    //Camera,
     AuthService,
     AngularFireAuth,
     PublicationService,
