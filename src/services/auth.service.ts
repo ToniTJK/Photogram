@@ -50,7 +50,7 @@ export class AuthService {
 			});
 		})
 	}
-/*
+
 	doLogout() {
 		return new Promise((resolve, reject) => {
 			if(this.angularFireAuth.auth.currentUser){
@@ -62,6 +62,6 @@ export class AuthService {
 				});
 			}
 		})
-	}*/
+	}
 	
 }

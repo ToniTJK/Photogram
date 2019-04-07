@@ -55,7 +55,7 @@ export class PublicationService {
         });
     
         return docs;
-    }
+	}
 
     // IMAGE STUFF
     addImage(id, url) {
