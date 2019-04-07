@@ -7,7 +7,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { HomePage } from '../home/home'; // PAGES 
 import { Publication } from '../../model/publi'; //MODEL
 // CAMERA
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 // SERVICES
 import { AuthService } from '../../services/auth.service';
 import { PublicationService } from '../../services/publicationService';
@@ -18,8 +18,7 @@ import { PublicationService } from '../../services/publicationService';
   providers: [
 		AuthService,
     PublicationService,
-    Camera
-  ]
+	  ]
 })
 
 export class CrearPostPage {
@@ -35,7 +34,7 @@ export class CrearPostPage {
     private viewCtrl: ViewController,
 		//private navParams: NavParams,
 		private loadingCtrl: LoadingController,
-		//private imagePicker: ImagePicker,
+		private imagePicker: ImagePicker,
 		private camera: Camera
     ) {
       this.publi = new Publication("","","","");
@@ -73,20 +72,20 @@ export class CrearPostPage {
 		this.item = this.navParams.get('item');
 	}*/
 	
-	/*saveImage() {
+	saveImage() {
 		this.loading = this.loadingCtrl.create({ content: '',
 												spinner: 'dots',
 												cssClass: 'spinner',
 												dismissOnPageChange: true
 											});
 		this.loading.present();
-		this._publiService.addImage(this.publi., this.publi.image)
-		this.itemsService.addImage(this.item.id, this.item.image)
+		this._publiService.addImage(this._authService.userId, this.publi.image)
+		//this.itemsService.addImage(this.item.id, this.item.image)
 		.then(res => {
 			this.loading.dismiss();
 			this.viewCtrl.dismiss();
 		})
-	}*/
+	}
 	
 /*
 	deleteImage() {
@@ -106,25 +105,28 @@ export class CrearPostPage {
 		}, (err) => console.log(err));
 	}
 	*/
-/*
+
 	imageFromCamera() {
 		let opciones: CameraOptions = {
-			destinationType: this.camera.DestinationType.DATA_URL,
-			targetWidth: 1000,
-			targetHeight: 1000,
-			quality: 100
+			quality: 100,
+			destinationType: this.camera.DestinationType.FILE_URI,
+			encodingType: this.camera.EncodingType.JPEG,
+			mediaType: this.camera.MediaType.PICTURE
+			//destinationType: this.camera.DestinationType.DATA_URL,
+			//targetWidth: 1000,
+			//targetHeight: 1000
 		}
 		
 		this.camera.getPicture(opciones)
 		.then(imagen => {
-			this.item.image = `data:image/jpeg;base64,${imagen}`;
+			this.publi.image = 'data:image/jpeg;base64,' + imagen;
 		})
 		.catch(error =>{
 			console.error( error );
 		});
 	}
-	*/
-/*
+	
+
 	imageFromGallery(){
 		this.imagePicker.hasReadPermission()
 		.then((result) => {
@@ -135,7 +137,7 @@ export class CrearPostPage {
 					maximumImagesCount: 1
 				}).then((results) => {
 					for (var i = 0; i < results.length; i++) {
-						this.item.image = normalizeURL(results[i]);
+						this.publi.image = normalizeURL(results[i]);
 					}
 				}, (err) => console.log(err));
 			}
@@ -143,7 +145,7 @@ export class CrearPostPage {
 			console.log(err);
 		});
 	}
-*/
+
   // REDIRECTS
 
   goToHome(){

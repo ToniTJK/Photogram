@@ -55,8 +55,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    //ImagePicker,
-    //Camera,
+    ImagePicker,
+    Camera,
     AuthService,
     AngularFireAuth,
     PublicationService,
