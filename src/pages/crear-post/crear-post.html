@@ -7,7 +7,9 @@
 </ion-header>
 <ion-content padding id="page6" style="background-color:#DF3363;">
   <form #createForm id="crearPost-form5">
-    <img src="assets/img/5NQPhYZxRvSEW1Kbz7gg_default-image.png" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;" />
+
+    <img id="image" src="{{publi.image}}" *ngIf="publi.image != null" />
+    
     <ion-item id="crearPost-input11">
       <ion-label>
         Título:
@@ -21,10 +23,10 @@
       <ion-textarea placeholder="Text here..." name="description" #description="ngModel" [(ngModel)]="publi.description"></ion-textarea>
     </ion-item>
   </form>
-  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="openCamera()">
+  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromCamera()">
     Take a picture
   </button>
-  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="openGallery()">
+  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromGallery()">
       Gallery
     </button>
   <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="createPublication()">
