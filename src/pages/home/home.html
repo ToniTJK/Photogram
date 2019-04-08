@@ -19,7 +19,7 @@
   </form>
 
 
-    <ion-item *ngFor="let publi of publications">
+    <ion-item *ngFor="let publi of publications" (click)="goToEditPost(publi)">
       <ion-col class="boxImage" size="12">
           <img src="gs://photogram-95189.appspot.com/images/richard.JPG" />
       </ion-col>

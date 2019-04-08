@@ -32,17 +32,33 @@ export class CrearPostPage {
     public _publiService: PublicationService,
     public _authService: AuthService,
     private viewCtrl: ViewController,
-		//private navParams: NavParams,
+		private navParams: NavParams,
 		private loadingCtrl: LoadingController,
 		private imagePicker: ImagePicker,
 		private camera: Camera
     ) {
-      this.publi = new Publication("","","","");
-    }
+      this.publi = new Publication("","","","","");
+		}
+		
+	ionViewWillLoad(){
+		if(this.navParams.get('publication') != null) {
+			this.publi = this.navParams.get('publication');
+		}
+		
+		console.log(this.publi);
+	}
+
+	isEdit(){
+		if(this.publi.user !== ""){
+			this.editPublication();
+		} else {
+			this.createPublication();
+		}
+	}
 
   createPublication(){
 		this.publi.user = this._authService.userId;
-		console.log(this.publi.user + " " + this.publi.title + " " + this.publi.description);
+	
 		this.loading = this.loadingCtrl.create({
 			content: '',
 			spinner: 'dots',
@@ -58,6 +74,22 @@ export class CrearPostPage {
 		});
 	}
 	
+	editPublication(){
+		this.loading = this.loadingCtrl.create({
+			content: '',
+			spinner: 'dots',
+			cssClass: 'spinner'
+		});
+		this.loading.present();
+		const param = JSON.parse(JSON.stringify(this.publi));
+		this._publiService.update(this.publi.id, param) // EDITAR
+		.then(res => {
+			this.resetPubli();
+			this.goToHome();
+			this.loading.dismiss();
+		});
+	}
+
 	resetPubli() {
 		this.currentPubliId = '';
 		this.publi.description = '';
@@ -67,10 +99,6 @@ export class CrearPostPage {
 	}
 
   // IMAGE STUFF
-    
-    /*ionViewWillLoad(){
-		this.item = this.navParams.get('item');
-	}*/
 	
 	saveImage() {
 		this.loading = this.loadingCtrl.create({ content: '',
@@ -109,12 +137,12 @@ export class CrearPostPage {
 	imageFromCamera() {
 		let opciones: CameraOptions = {
 			quality: 100,
-			destinationType: this.camera.DestinationType.FILE_URI,
-			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE
-			//destinationType: this.camera.DestinationType.DATA_URL,
-			//targetWidth: 1000,
-			//targetHeight: 1000
+			//destinationType: this.camera.DestinationType.FILE_URI,
+			//encodingType: this.camera.EncodingType.JPEG,
+			//mediaType: this.camera.MediaType.PICTURE
+			destinationType: this.camera.DestinationType.DATA_URL,
+			targetWidth: 1000,
+			targetHeight: 1000
 		}
 		
 		this.camera.getPicture(opciones)
