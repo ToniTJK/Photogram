@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page6" style="background-color:#DF3363;">
-  <form #createForm id="crearPost-form5">
+  <form *ngIf="isOwner" #createForm id="crearPost-form5">
 
     <img id="image" src="{{publi.image}}" *ngIf="publi.image != null" />
     
@@ -23,13 +23,39 @@
       <ion-textarea placeholder="Text here..." name="description" #description="ngModel" [(ngModel)]="publi.description"></ion-textarea>
     </ion-item>
   </form>
-  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromCamera()">
-    Take a picture
-  </button>
-  <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromGallery()">
-      Gallery
+  <div *ngIf="isOwner">
+    <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromCamera()">
+      Take a picture
     </button>
-  <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="isEdit()">
-    Crear
-  </button>
+    <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromGallery()">
+        Gallery
+    </button>
+    <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="isEdit()">
+      Crear
+    </button>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" *ngIf="!isOwner">
+          <div class="row">
+            <div class="col-md-12">
+                <img id="image" src="{{publi.image}}" *ngIf="publi.image != null" />
+            </div>   
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2 for="defaultTitle">Título: </h2>
+              <p id="defaultTitle">{{publi.title}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2 for="defaultDescription">Description: </h2>
+              <p id="defaultDescription">{{publi.description}}</p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
 </ion-content>

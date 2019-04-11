@@ -40,6 +40,7 @@
     "firebase": "^5.9.1",
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
+    "material-components-web": "^1.1.1",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",

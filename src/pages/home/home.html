@@ -7,21 +7,21 @@
       <button (click)="goToCreatorPost()" ion-button icon-only>
         <ion-icon name="add"></ion-icon>
       </button>
-      <button ion-button icon-only>
-        <ion-icon (click)="logOut()" name="log-out"></ion-icon>
+      <button (click)="logOut()" ion-button icon-only>
+        <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page1" style="background-color:#DF3363;">
   <form id="home-form4">
-    <ion-searchbar placeholder="" name="" id="home-search1"></ion-searchbar>
+    <ion-searchbar placeholder="" name="" id="home-search1"> </ion-searchbar>
   </form>
 
 
     <ion-item *ngFor="let publi of publications" (click)="goToEditPost(publi)">
       <ion-col class="boxImage" size="12">
-          <img src="gs://photogram-95189.appspot.com/images/richard.JPG" />
+          <img src="{{publi.image}}" />
       </ion-col>
       <ion-col size="12">
           <h2>{{publi.title}}</h2>

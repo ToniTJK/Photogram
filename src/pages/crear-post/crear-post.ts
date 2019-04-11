@@ -21,13 +21,14 @@ import { PublicationService } from '../../services/publicationService';
 	  ]
 })
 
-export class CrearPostPage {
+export class CrearPostPage{
 
 	private publi:Publication;
 	private loading: any;
 	private currentPubliId: any;
+	private isOwner: boolean;
 
-  constructor(
+  constructor (
     public navCtrl: NavController,
     public _publiService: PublicationService,
     public _authService: AuthService,
@@ -37,15 +38,20 @@ export class CrearPostPage {
 		private imagePicker: ImagePicker,
 		private camera: Camera
     ) {
-      this.publi = new Publication("","","","","");
+	  this.publi = new Publication("","","","","");
+	  this.isOwner = false;
 		}
 		
 	ionViewWillLoad(){
 		if(this.navParams.get('publication') != null) {
 			this.publi = this.navParams.get('publication');
+			if(this.publi.user == this._authService.userId){
+				this.isOwner = true;
+			}
 		}
 		
 		console.log(this.publi);
+		console.log(this.isOwner);
 	}
 
 	isEdit(){
@@ -107,7 +113,7 @@ export class CrearPostPage {
 												dismissOnPageChange: true
 											});
 		this.loading.present();
-		this._publiService.addImage(this._authService.userId, this.publi.image)
+		this._publiService.addImage(this.publi.id, this.publi.image)
 		//this.itemsService.addImage(this.item.id, this.item.image)
 		.then(res => {
 			this.loading.dismiss();
@@ -141,6 +147,7 @@ export class CrearPostPage {
 			//encodingType: this.camera.EncodingType.JPEG,
 			//mediaType: this.camera.MediaType.PICTURE
 			destinationType: this.camera.DestinationType.DATA_URL,
+			saveToPhotoAlbum:false,
 			targetWidth: 1000,
 			targetHeight: 1000
 		}

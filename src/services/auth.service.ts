@@ -52,6 +52,7 @@ export class AuthService {
 	}
 
 	doLogout() {
+		console.log("asd");
 		return new Promise((resolve, reject) => {
 			if(this.angularFireAuth.auth.currentUser){
 				this.angularFireAuth.auth.signOut()

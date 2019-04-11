@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { PublicationService } from '../../services/publicationService';
 import { CrearPostPage } from '../crear-post/crear-post'
+import { LogInPage } from '../log-in/log-in'
 import { AuthService } from '../../services/auth.service';
 import { Publication } from '../../model/publi';
 
@@ -13,14 +14,14 @@ import { Publication } from '../../model/publi';
 export class HomePage {
 
   private publications:Array<any>;
-  private imageSource:any;
-  private publicationImage:any;
   private currentPublication:Publication;
+  private loading: any;
 
   constructor(
     public navCtrl: NavController,
     public _publicationService: PublicationService,
-    public _authService: AuthService
+    public _authService: AuthService,
+    private loadingCtrl: LoadingController,
     ) {
       this.currentPublication = new Publication("","","","","");
   }
@@ -35,9 +36,16 @@ export class HomePage {
 	}
 
   loadData(){
+    this.loading = this.loadingCtrl.create({
+			content: '',
+			spinner: 'dots',
+			cssClass: 'spinner'
+    });
+    this.loading.present();
     this._publicationService.getPublications()
     .then(publications => {
-			this.publications = publications;
+      this.publications = publications;
+      this.loading.dismiss();
 		});
   }
 
@@ -49,7 +57,21 @@ export class HomePage {
   }
 
   logOut(){
-    this._authService.doLogout();
+    this.loading = this.loadingCtrl.create({
+			content: '',
+			spinner: 'dots',
+			cssClass: 'spinner'
+    });
+    this.loading.present();
+    this._authService.doLogout()
+    .then(res => {
+			this.goToLogIn();
+			this.loading.dismiss();
+		});
+  }
+
+  goToLogIn(){
+    this.navCtrl.push(LogInPage);
   }
   
   goToCreatorPost(){
