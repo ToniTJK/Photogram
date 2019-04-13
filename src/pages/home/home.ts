@@ -6,6 +6,7 @@ import { LogInPage } from '../log-in/log-in'
 import { AuthService } from '../../services/auth.service';
 import { Publication } from '../../model/publi';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -13,9 +14,11 @@ import { Publication } from '../../model/publi';
 })
 export class HomePage {
 
-  private publications:Array<any>;
+  private publications:Array<Publication>;
+  private publications2:Array<Publication>;
   private currentPublication:Publication;
   private loading: any;
+  private ownPubli:boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +27,7 @@ export class HomePage {
     private loadingCtrl: LoadingController,
     ) {
       this.currentPublication = new Publication("","","","","");
+      this.ownPubli = false;
   }
 
   /*ngOnInit(){
@@ -33,7 +37,15 @@ export class HomePage {
   ionViewWillEnter(){
     this.loadData();
     this.resetPubli();
-	}
+  }
+  
+  toggleCheckbox(){
+    console.log(this.ownPubli);
+    if(this.ownPubli == true)
+      this.loadOwnPubli();
+    else 
+      this.loadData();
+  }
 
   loadData(){
     this.loading = this.loadingCtrl.create({
@@ -44,7 +56,30 @@ export class HomePage {
     this.loading.present();
     this._publicationService.getPublications()
     .then(publications => {
+      this.publications = [];
       this.publications = publications;
+      this.loading.dismiss();
+		});
+  }
+
+  loadOwnPubli(){
+    this.loading = this.loadingCtrl.create({
+			content: '',
+			spinner: 'dots',
+			cssClass: 'spinner'
+    });
+    this.loading.present();
+    this._publicationService.getPublications()
+    .then(result => {
+      this.publications = [];
+      for(let data of result) {
+        //console.log("---");
+        //console.log(data.user + " == " + this._authService.userId);
+        if (data.user == this._authService.userId )
+          this.publications.push(data);
+          
+      }
+      
       this.loading.dismiss();
 		});
   }
@@ -57,17 +92,21 @@ export class HomePage {
   }
 
   logOut(){
-    this.loading = this.loadingCtrl.create({
-			content: '',
-			spinner: 'dots',
-			cssClass: 'spinner'
-    });
-    this.loading.present();
-    this._authService.doLogout()
-    .then(res => {
-			this.goToLogIn();
-			this.loading.dismiss();
-		});
+    if(this._authService.userId != null){
+      this.loading = this.loadingCtrl.create({
+        content: '',
+        spinner: 'dots',
+        cssClass: 'spinner'
+      });
+      this.loading.present();
+      this._authService.doLogout()
+      .then(res => {
+        this.goToLogIn();
+        this.loading.dismiss();
+      });
+    } else {
+      this.goToLogIn();
+    }
   }
 
   goToLogIn(){

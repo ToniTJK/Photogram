@@ -15,8 +15,33 @@
 </ion-header>
 <ion-content padding id="page1" style="background-color:#DF3363;">
   <form id="home-form4">
-    <ion-searchbar placeholder="" name="" id="home-search1"> </ion-searchbar>
+    
+    <!--<ion-checkbox checked="false" [(ngModel)]="ownPubli.checked"></ion-checkbox>-->
+    
   </form>
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+            <!--<ion-searchbar placeholder="" name="" id=""> </ion-searchbar>-->
+            <div class="box">
+                <div class="container-1">
+                    <span class="icon"> <i class="fa fa-search"></i></span>
+                    <input type="search" id="search" placeholder="Search..." />
+                </div>
+              </div>
+            <ion-checkbox name="ownPubli" [(ngModel)]="ownPubli" (click)="toggleCheckbox()"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+  
+          
+          
+      
+  <!--<div class="col-sm-5">
+    <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+      <div class="handle"></div>
+    </button>
+  </div>-->
 
 
     <ion-item *ngFor="let publi of publications" (click)="goToEditPost(publi)">

@@ -27,6 +27,8 @@ export class CrearPostPage{
 	private loading: any;
 	private currentPubliId: any;
 	private isOwner: boolean;
+	private isNew: boolean;
+	private isEditarBtn:boolean;
 
   constructor (
     public navCtrl: NavController,
@@ -40,26 +42,37 @@ export class CrearPostPage{
     ) {
 	  this.publi = new Publication("","","","","");
 	  this.isOwner = false;
+	  this.isNew = false;
+	  this.isEditarBtn = false;
 		}
 		
 	ionViewWillLoad(){
+		console.log(this._authService.userId);
+		//var x = document.getElementById("crearPost-button12");
 		if(this.navParams.get('publication') != null) {
 			this.publi = this.navParams.get('publication');
+			//x.innerHTML = "EDITAR";
+			this.isEditarBtn = true;
 			if(this.publi.user == this._authService.userId){
 				this.isOwner = true;
 			}
+		} else {
+			this.isNew = true;
+			//x.innerHTML = "CREAR"
 		}
-		
-		console.log(this.publi);
-		console.log(this.isOwner);
 	}
 
 	isEdit(){
-		if(this.publi.user !== ""){
-			this.editPublication();
+		if(this._authService.userId != null){
+			if(this.publi.user !== ""){
+				this.editPublication();
+			} else {
+				this.createPublication();
+			}
 		} else {
-			this.createPublication();
+			alert("Tienes que iniciar sesión si quieres hacer eso!");
 		}
+		
 	}
 
   createPublication(){
@@ -148,8 +161,8 @@ export class CrearPostPage{
 			//mediaType: this.camera.MediaType.PICTURE
 			destinationType: this.camera.DestinationType.DATA_URL,
 			saveToPhotoAlbum:false,
-			targetWidth: 1000,
-			targetHeight: 1000
+			targetWidth: 500,
+			targetHeight: 500
 		}
 		
 		this.camera.getPicture(opciones)
@@ -163,22 +176,23 @@ export class CrearPostPage{
 	
 
 	imageFromGallery(){
-		this.imagePicker.hasReadPermission()
-		.then((result) => {
-			if(result == false){
-				this.imagePicker.requestReadPermission();
-			} else {
-				this.imagePicker.getPictures({
-					maximumImagesCount: 1
-				}).then((results) => {
-					for (var i = 0; i < results.length; i++) {
-						this.publi.image = normalizeURL(results[i]);
-					}
-				}, (err) => console.log(err));
-			}
-		}, (err) => {
-			console.log(err);
+		let opciones: CameraOptions = {
+			quality: 100,
+			destinationType: this.camera.DestinationType.DATA_URL,
+			sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+			saveToPhotoAlbum:false,
+			targetWidth: 500,
+			targetHeight: 500
+		}
+		
+		this.camera.getPicture(opciones)
+		.then(imagen => {
+			this.publi.image = 'data:image/jpeg;base64,' + imagen;
+		})
+		.catch(error =>{
+			console.error( error );
 		});
+		
 	}
 
   // REDIRECTS

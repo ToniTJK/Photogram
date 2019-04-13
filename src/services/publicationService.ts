@@ -23,7 +23,16 @@ export class PublicationService {
                     resolve(this.snapshotToArray(snapshots));
                 });
         });
-    }
+	}
+	
+	getOne(id) {
+		return new Promise<any>((resolve, reject) => {
+			this.snapshotChangesSubscription = this.db.collection('publications').doc(id).snapshotChanges() 
+			.subscribe(snapshots => {
+				resolve(this.snapshotToArray(snapshots));
+			});
+		});
+	}
 
     create(values) {
         console.log(values);

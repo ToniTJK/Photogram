@@ -8,7 +8,6 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LogInPage } from '../pages/log-in/log-in';
 import { RegistrarPage } from '../pages/registrar/registrar';
-import { EditarPostPage } from '../pages/editar-post/editar-post';
 import { CrearPostPage } from '../pages/crear-post/crear-post';
 
 // FIREBASE
@@ -34,7 +33,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     LogInPage,
     RegistrarPage,
-    EditarPostPage,
     CrearPostPage,
   ],
   imports: [
@@ -49,7 +47,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     LogInPage,
     RegistrarPage,
-    EditarPostPage,
     CrearPostPage
   ],
   providers: [

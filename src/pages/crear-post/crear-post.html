@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page6" style="background-color:#DF3363;">
-  <form *ngIf="isOwner" #createForm id="crearPost-form5">
+  <form *ngIf="isOwner || isNew" #createForm id="crearPost-form5">
 
     <img id="image" src="{{publi.image}}" *ngIf="publi.image != null" />
     
@@ -23,15 +23,18 @@
       <ion-textarea placeholder="Text here..." name="description" #description="ngModel" [(ngModel)]="publi.description"></ion-textarea>
     </ion-item>
   </form>
-  <div *ngIf="isOwner">
+  <div *ngIf="isOwner || isNew">
     <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromCamera()">
       Take a picture
     </button>
     <button id="crearPost-button11" ion-button color="energized" class="btnTakePicture" on-click="imageFromGallery()">
         Gallery
     </button>
-    <button id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="isEdit()">
+    <button *ngIf="!isEditarBtn" id="crearPost-button12" ion-button color="balanced" class="btnCrear" on-click="isEdit()">
       Crear
+    </button>
+    <button *ngIf="isEditarBtn" id="crearPost-button17" ion-button color="balanced" class="btnCrear" on-click="isEdit()">
+      Editar
     </button>
   </div>
   <div class="container-fluid">
